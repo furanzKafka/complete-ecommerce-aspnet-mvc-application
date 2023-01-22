@@ -10,7 +10,7 @@ namespace eTickets.Models
         public string FullName { get; set; }
         [Display(Name = "biography")]
         public string Bio { get; set; }
-        [Display(Name = "profile picture url")]
+        [Display(Name = "profile picture ")]
         public string ProfilePictureURL { get; set; }
         public List<ActorMovie> ActorMovies { get; set; }
     }

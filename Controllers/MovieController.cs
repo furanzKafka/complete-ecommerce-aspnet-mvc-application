@@ -1,5 +1,7 @@
 ﻿using eTickets.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Immutable;
 
 namespace eTickets.Controllers
 {
@@ -14,7 +16,8 @@ namespace eTickets.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View();
+            var allMovie =await _context.Movies.ToListAsync();
+            return View(allMovie);
         }
     }
 }
