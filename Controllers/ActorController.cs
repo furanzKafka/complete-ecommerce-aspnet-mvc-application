@@ -23,7 +23,7 @@ namespace eTickets.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var allActor = await _service.GetAll();
+            var allActor = await _service.GetAllAsync();
             return View(allActor);
         }
         [HttpGet]
@@ -38,8 +38,52 @@ namespace eTickets.Controllers
             {
                 return View(actor);
             }
-            _service.Add(actor);
-            return RedirectToAction(nameof(Index));
+            _service.AddAsync(actor);
+            return RedirectToAction("Index");
+        }
+        [HttpGet]
+        public async Task<IActionResult> Details(int id)
+        {
+            var result = await _service.GetByIdAsync(id);
+
+            if(result == null) return View("empty");
+            return View(result);
+        }
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var result = await _service.GetByIdAsync(id);
+
+            if (result == null) return View("not found");
+            return View(result);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id,[Bind("Id,FullName,ProfilePictureURL,Bio")] Actor actor)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(actor);
+            }
+            await _service.UpdateAsync(id,actor);
+            return RedirectToAction("Index");
+        }
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var result = await _service.GetByIdAsync(id);
+
+            if (result == null) return View("not found");
+            return View(result);
+        }
+        [HttpPost,ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var result = await _service.GetByIdAsync(id);
+
+            if (result == null) return View("not found");
+
+            await _service.DeleteAsync(id);
+            return RedirectToAction("Index");
         }
     }
 }

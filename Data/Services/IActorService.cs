@@ -4,10 +4,10 @@ namespace eTickets.Data.Services
 {
     public interface IActorService
     {
-        Task<IEnumerable<Actor>> GetAll();
-        Actor GetActor(int id);
-        void Add(Actor actor);
-        Actor Update(Actor actor);
-        void Delete(int id);
+        Task<IEnumerable<Actor>> GetAllAsync();
+        Task<Actor> GetByIdAsync(int id);
+        Task AddAsync(Actor actor);
+        Task<Actor> UpdateAsync(int id,Actor actor);
+        Task DeleteAsync(int id);
     }
 }
