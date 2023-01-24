@@ -1,14 +1,14 @@
-﻿@model Actor
+﻿@model Producer
 
 @{
-    ViewData["Title"] = "details actor";
+    ViewData["Title"] = "delete produce";
 }
 
 <div class="row text">
     <div class="col-md-8 offset-2">
 
         <p>
-            <h1>details @Model.FullName</h1>
+            <h1>delete @Model.FullName</h1>
         </p>
         <div class="row">
             <div class="col-md-8 offset-2">
@@ -31,7 +31,10 @@
                     <span asp-validation-for="Bio" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <a class="btn btn-outline-success float-right" asp-action="Edit" asp-route-id="@Model.Id">edit</a>
+                    <form asp-action="Delete">
+                        <input type="hidden" asp-for="Id" />
+                        <input type="submit" value="Confirm" class="btn btn-danger float-right" />
+                    </form>
                     <a class="btn btn-outline-secondary" asp-action="Index">show all</a>
                 </div>
             </div>

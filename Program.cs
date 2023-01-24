@@ -12,6 +12,7 @@ builder.Services.AddDbContext<AppDbContext>(options=>options.UseSqlServer(builde
 
 //dependency injection
 builder.Services.AddScoped<IActorService,ActorService>();
+builder.Services.AddScoped<IProducerService,ProducerService>();
 
 var app = builder.Build();
 
