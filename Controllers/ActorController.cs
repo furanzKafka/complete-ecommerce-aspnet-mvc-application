@@ -46,7 +46,7 @@ namespace eTickets.Controllers
         {
             var result = await _service.GetByIdAsync(id);
 
-            if(result == null) return View("empty");
+            if(result == null) return View("Empty");
             return View(result);
         }
         [HttpGet]
@@ -54,7 +54,7 @@ namespace eTickets.Controllers
         {
             var result = await _service.GetByIdAsync(id);
 
-            if (result == null) return View("not found");
+            if (result == null) return View("NotFound");
             return View(result);
         }
         [HttpPost]
@@ -72,7 +72,7 @@ namespace eTickets.Controllers
         {
             var result = await _service.GetByIdAsync(id);
 
-            if (result == null) return View("not found");
+            if (result == null) return View("NotFound");
             return View(result);
         }
         [HttpPost,ActionName("Delete")]
@@ -80,7 +80,7 @@ namespace eTickets.Controllers
         {
             var result = await _service.GetByIdAsync(id);
 
-            if (result == null) return View("not found");
+            if (result == null) return View("NotFound");
 
             await _service.DeleteAsync(id);
             return RedirectToAction("Index");
