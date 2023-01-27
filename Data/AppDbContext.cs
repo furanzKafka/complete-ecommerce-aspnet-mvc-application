@@ -1,9 +1,10 @@
 ﻿using eTickets.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace eTickets.Data
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext<ApplicationUser>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
@@ -19,6 +20,8 @@ namespace eTickets.Data
 
             modelBuilder.Entity<ActorMovie>().HasOne(x => x.Movie).WithMany(y => y.ActorMovies).HasForeignKey(x => x.MovieId);
             modelBuilder.Entity<ActorMovie>().HasOne(x => x.Actor).WithMany(y => y.ActorMovies).HasForeignKey(x => x.ActorId);
+
+            modelBuilder.Entity<Order>().HasOne(x=>x.User).WithMany().OnDelete(DeleteBehavior.Restrict);
 
             base.OnModelCreating(modelBuilder);
         }
